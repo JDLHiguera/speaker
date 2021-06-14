@@ -24,7 +24,7 @@ client.on('message', message => {
  var timer;
 
  if (command === 'vente') {
-   message.reply("enga, voy a un lol");
+    message.channel.send("enga, voy a un lol");
    console.log(`${new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })} - Joined VC`)
    playing = true;
    var last = 0;
@@ -49,7 +49,7 @@ client.on('message', message => {
    }).catch(err => console.log(err));
 
  } else if (command === 'vete') {
-  message.reply("me voy a estudiar, hasta luego chavales");
+   message.channel.send("me voy a estudiar, hasta luego chavales");
   if(timer !== undefined) clearTimeout(timer);
   voiceChannel.leave();
   console.log(`${new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })} - Disconnected from VC`)
