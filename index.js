@@ -21,6 +21,7 @@ client.on('message', message => {
  const args = message.content.slice(prefix.length).trim().split(/ +/);
  const command = args.shift().toLowerCase();
  voiceChannel = message.member.voice.channel;
+ var timer;
 
  if (command === 'join') {
    message.reply("*joining*");
@@ -33,28 +34,23 @@ client.on('message', message => {
       // Play a sound on join
       connection.play(`audio/0.mp3`);
       function play() {
-        if (playing) {
           let file = Math.floor(Math.random() * fs.readdirSync('audio').length);
           while (file == last) {
             file = Math.floor(Math.random() * fs.readdirSync('audio').length);
           }
           console.log(`playing file: ${file}.mp3`)
           connection.play(`audio/${file}.mp3`);
-          clearInterval(timer);
-          timer = setInterval(play, randRange(timeArray));
+          timer = setTimeout(play, randRange(timeArray));
           last = file;
-        }
-        else 
-         clearInterval(timer);
      }
 
      // waiting 5 seconds to play another sound, change to whatever you want
-     var timer = setInterval(play, 5000);
+     
    }).catch(err => console.log(err));
 
  } else if (command === 'leave') {
   message.reply("*leaving*");
-  playing  = false;
+  if(timer !== undefined) clearTimeout(timer);
   voiceChannel.leave();
   console.log(`${new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })} - Disconnected from VC`)
 }
