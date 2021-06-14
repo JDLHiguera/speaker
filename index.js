@@ -43,7 +43,7 @@ client.on('message', message => {
           timer = setTimeout(play, randRange(timeArray));
           last = file;
      }
-
+     timer = setTimeout(play, 5000);
      // waiting 5 seconds to play another sound, change to whatever you want
      
    }).catch(err => console.log(err));
