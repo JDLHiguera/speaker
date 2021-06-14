@@ -8,7 +8,6 @@ var timeArray = new Array(30000, 70000, 40000, 90000, 15000, 7000, 20000, 80000)
 const prefix = config.prefix;
 
 
-var playing = false;
 var voiceChannel;
 
 client.once('ready', () => {
@@ -26,7 +25,6 @@ client.on('message', message => {
  if (command === 'vente') {
     message.channel.send("enga, voy a un lol");
    console.log(`${new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })} - Joined VC`)
-   playing = true;
    var last = 0;
 
    voiceChannel.join().then(connection =>{
