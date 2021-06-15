@@ -4,10 +4,11 @@ const fs = require('fs')
 const client = new Discord.Client();
 
 // These are the possible time intervals, change to whatever you want.
-var timeArray = new Array(30000, 70000, 40000, 90000, 15000, 7000, 20000, 80000);
+var timeArray = new Array(300000, 700000, 400000, 900000, 150000, 70000, 200000, 800000);
 const prefix = config.prefix;
 
 
+var playing = false;
 var voiceChannel;
 
 client.once('ready', () => {
@@ -15,7 +16,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
- if (!message.content.startsWith(prefix) || message.author.bot) return;
+  if (!message.member.voice.channel || !message.content.startsWith(prefix) || message.author.bot) return;
 
  const args = message.content.slice(prefix.length).trim().split(/ +/);
  const command = args.shift().toLowerCase();
@@ -25,6 +26,7 @@ client.on('message', message => {
  if (command === 'vente') {
     message.channel.send("enga, voy a un lol");
    console.log(`${new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })} - Joined VC`)
+   playing = true;
    var last = 0;
 
    voiceChannel.join().then(connection =>{
