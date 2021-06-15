@@ -7,8 +7,6 @@ const client = new Discord.Client();
 var timeArray = new Array(300000, 700000, 400000, 900000, 150000, 70000, 200000, 800000);
 const prefix = config.prefix;
 
-
-var playing = false;
 var voiceChannel;
 
 client.once('ready', () => {
@@ -26,7 +24,6 @@ client.on('message', message => {
  if (command === 'vente') {
     message.channel.send("enga, voy a un lol");
    console.log(`${new Date().toLocaleTimeString([], { hour: '2-digit', minute: "2-digit" })} - Joined VC`)
-   playing = true;
    var last = 0;
 
    voiceChannel.join().then(connection =>{
